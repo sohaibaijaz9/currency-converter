@@ -34,9 +34,9 @@ namespace CurrencyConverterBackend.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new Response<ExchangeRateResponse>()
+                return StatusCode(400, new Response<ExchangeRateResponse>()
                 {
-                    Message = $"Internal server error: {ex.Message}",
+                    Message = ex.Message,
                     Success = false
                 });
             }
@@ -52,9 +52,9 @@ namespace CurrencyConverterBackend.Controllers
             }
             catch(Exception ex)
             {
-                return StatusCode(500, new Response<ExchangeRateResponse>()
+                return StatusCode(400, new Response<ExchangeRateResponse>()
                 {
-                    Message = $"Internal server error: {ex.Message}",
+                    Message = ex.Message,
                     Success = false
                 });
             }
@@ -70,9 +70,9 @@ namespace CurrencyConverterBackend.Controllers
             }
             catch(Exception ex)
             {
-                return StatusCode(500, new Response<ExchangeRateResponse>()
+                return StatusCode(400, new Response<ExchangeRateResponse>()
                 {
-                    Message = $"Internal server error: {ex.Message}",
+                    Message = ex.Message,
                     Success = false
                 });
             }
