@@ -7,8 +7,6 @@ using CurrencyConverterBackend.Queries.HistoricalRates;
 using CurrencyConverterBackend.Queries.LatestExchangeRates;
 using CurrencyConverterBackend.Utilities;
 using FluentValidation;
-using FluentValidation.AspNetCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +18,7 @@ builder.Services.AddControllers();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
 //API service client
-builder.Services.AddScoped<ApiServiceClient>(provider => new ApiServiceClient(builder.Configuration.GetSection("ExternalApiBaseUrl")?.Value?.ToString()));
+builder.Services.AddScoped<ApiServiceClient>(provider => new ApiServiceClient(builder.Configuration.GetSection("ExternalApi").GetValue<string>("BaseUrl")));
 
 //Commands
 builder.Services.AddScoped<ICommandHandler<CurrencyConversionCommand, Response<ConversionResponse>>, CurrencyConversionCommandHandler>();

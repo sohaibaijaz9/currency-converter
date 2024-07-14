@@ -1,5 +1,6 @@
 ﻿using CurrencyConverterBackend.Commands.CurrencyConversion;
 using CurrencyConverterBackend.Models;
+using CurrencyConverterBackend.Tests.Utilities;
 using CurrencyConverterBackend.Utilities;
 using FluentAssertions;
 using FluentValidation;
@@ -14,9 +15,9 @@ namespace CurrencyConverterBackend.Tests
 
         public CurrencyConverisonCommandHandlerTests()
         {
-            var configuration = LoadConfiguration();
+            var configuration = BaseConfig.LoadConfiguration();
 
-            _apiClient = new ApiServiceClient(configuration.GetSection("ExternalApiBaseUrl").Value.ToString());
+            _apiClient = new ApiServiceClient(configuration.GetSection("ExternalApi").GetValue<string>("BaseUrl"));
             _validator = new CurrencyConversionCommandValidator(configuration);
         }
 
@@ -55,14 +56,6 @@ namespace CurrencyConverterBackend.Tests
             //Asset
             await act.Should().ThrowAsync<ValidationException>()
            .Where(ex => ex.Errors.Count() == validationFailures.Errors.Count);
-        }
-        private IConfiguration LoadConfiguration()
-        {
-            var configurationBuilder = new ConfigurationBuilder()
-                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../../../../CurrencyConverterBackend"))
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-
-            return configurationBuilder.Build();
         }
     }
 }
