@@ -11,12 +11,13 @@ This is the currency converter backend API project utilizing [Frankfuter API](ht
 - Polly - for retry calling external API's
 - RestSharp - for calling external API's
 - Swagger - for API documentation
+- Semaphore Slim - for rate limiting external API's
 - xUnit - for Testing
 
 ## Start the project
 
 - Select the **IIS Express** named profile for the project.
-- Click on start project to run.
+- Click on start to run the project.
 
 ## Run the tests
 
